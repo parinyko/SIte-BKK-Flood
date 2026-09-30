@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+
+    <title>Flood Site Base Map</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-icon">🌊</div>
+        <div>
+            <div class="brand-title">Flood Site Base</div>
+            <div class="brand-subtitle">Site Location Map</div>
+        </div>
+    </div>
+
+    <div class="site-total">
+        <span id="siteCount">{{ "{:,}".format(site_count) }}</span>
+        <small>Sites</small>
+    </div>
+</header>
+
+<main class="app">
+
+    <section class="control-panel">
+
+        <div class="search-row">
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="ค้นหา Site Code / ชื่อสถานที่..."
+                    autocomplete="off">
+                <button id="clearBtn" class="clear-btn" type="button">×</button>
+            </div>
+
+            <button id="locateBtn" class="locate-btn" type="button"
+                    title="ตำแหน่งของฉัน">◎</button>
+        </div>
+
+        <div id="searchResults" class="search-results"></div>
+
+        <div class="legend">
+            <span class="legend-dot"></span>
+            <span>Site Base</span>
+        </div>
+    </section>
+
+    <section id="map"></section>
+
+    <aside id="detailPanel" class="detail-panel">
+        <button id="closeDetail" class="close-detail">×</button>
+
+        <div class="detail-head">
+            <div class="detail-marker">●</div>
+            <div>
+                <div class="detail-label">SITE BASE</div>
+                <div id="detailCode" class="detail-code">-</div>
+            </div>
+        </div>
+
+        <div class="detail-body">
+            <div class="detail-name" id="detailName">-</div>
+
+            <div class="detail-item">
+                <span>ตำบล</span>
+                <strong id="detailTumbol">-</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>อำเภอ</span>
+                <strong id="detailAmphur">-</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>จังหวัด</span>
+                <strong id="detailProvince">-</strong>
+            </div>
+
+            <div class="coordinates">
+                <div>
+                    <span>LAT</span>
+                    <strong id="detailLat">-</strong>
+                </div>
+                <div>
+                    <span>LON</span>
+                    <strong id="detailLon">-</strong>
+                </div>
+            </div>
+
+            <button id="googleBtn" class="google-btn" type="button">
+                📍 เปิด Google Maps
+            </button>
+        </div>
+    </aside>
+
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <span>กำลังโหลด Site Base...</span>
+    </div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
